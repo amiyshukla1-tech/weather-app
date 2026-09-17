@@ -1,14 +1,104 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A responsive and modern weather forecast web application displaying real-time weather, 24-hour history, and future forecasts.">
+    <title>Weather Web App</title>
     <link href="./output.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1 class="text-3xl font-bold text-red-500">Hello Tailwind</h1>
+<body class="bg-cover bg-center bg-no-repeat min-h-screen flex justify-center items-center " <body class=" "
+    style="background-image: url('./paul-green-tvk4EKq9m_w-unsplash.jpg');">
+
+    <div class="w-full max-w-4xl mx-auto flex flex-col gap-6 sm:gap-8 my-auto">
+
+        <!-- 1. Header -->
+        <header class="text-center py-4">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-md">
+                Weather Dashboard
+            </h1>
+            <p class="text-sm sm:text-base text-white/80 mt-1 drop-shadow-sm font-medium">
+                Live forecast and 24-hour weather insights
+            </p>
+        </header>
+
+        <!-- 2. Search Area -->
+        <section aria-label="Search Location" class="w-full max-w-lg mx-auto">
+            <form
+                class="flex flex-col sm:flex-row gap-3 items-stretch shadow-lg rounded-2xl p-1.5 bg-slate-900/60 backdrop-blur-md border border-white/20"
+                onsubmit="return false;">
+                <input type="text" id="location-input" placeholder="Search city or location..."
+                    class="input input-ghost flex-1 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/10 rounded-xl px-4 py-2" />
+                <button type="button" id="search-btn"
+                    class="btn btn-primary sm:px-6 rounded-xl font-semibold shadow-md">
+                    Search
+                </button>
+            </form>
+        </section>
+
+        <!-- 3. Current Weather Section -->
+        <section aria-label="Current Weather"
+            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl overflow-hidden p-6 sm:p-8">
+            <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/10">
+                <div>
+                    <h2 id="location" class="text-2xl sm:text-3xl font-bold tracking-tight"></h2>
+                    <span
+                        class="text-xs uppercase tracking-widest text-white/60 font-semibold mt-1 block">Condition</span>
+                    <p id="condition" class="text-base sm:text-lg font-medium text-white/90"></p>
+                </div>
+            </div>
+
+            <!-- Temperature Highlight -->
+            <div class="py-6 sm:py-8">
+                <span class="text-xs uppercase tracking-widest text-white/60 font-semibold block">Temperature</span>
+                <p id="temperature" class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1"></p>
+            </div>
+
+            <!-- Meteorological Details Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                <div
+                    class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10 flex flex-col justify-center">
+                    <span class="text-xs uppercase tracking-wider text-white/70 font-semibold">Wind</span>
+                    <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                </div>
+                <div
+                    class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10 flex flex-col justify-center">
+                    <span class="text-xs uppercase tracking-wider text-white/70 font-semibold">Rain Probability</span>
+                    <p id="rain" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Previous 24 Hours Section -->
+        <section id="previous-hours"
+            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Previous 24 Hours</h2>
+            <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
+            </div>
+        </section>
+
+        <!-- 5. Future 24 Hours Section -->
+        <section id="future-hours"
+            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Next 24 Hours</h2>
+            <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
+            </div>
+        </section>
+
+        <!-- 6. Refresh Button -->
+        <div class="flex justify-center pt-2 pb-6">
+            <button type="button" id="refresh-btn"
+                class="btn btn-outline btn-accent sm:btn-wide rounded-xl shadow-lg border-white/30 text-white hover:bg-white/20 hover:border-white/40">
+                Refresh
+            </button>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
