@@ -30,8 +30,8 @@
             <form
                 class="flex flex-col sm:flex-row gap-3 items-stretch shadow-lg rounded-2xl p-1.5 bg-slate-900/60 backdrop-blur-md border border-white/20"
                 onsubmit="return false;">
-                <input type="text" id="location-input" placeholder="Search city or location..."
-                    class="input input-ghost flex-1 text-white placeholder:text-white/60 focus:outline-none focus:bg-white/10 rounded-xl px-4 py-2" />
+                <input type="text" id="location-input" placeholder="Search city or location"
+                    class="input input-ghost flex-1 text-white placeholder:text-white/60 focus:outline-none" />
                 <button type="button" id="search-btn"
                     class="btn btn-primary sm:px-6 rounded-xl font-semibold shadow-md">
                     Search
@@ -75,7 +75,7 @@
 
         <!-- 4. Previous 24 Hours Section -->
         <section id="previous-hours"
-            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8">
+            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8 text-center">
             <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Previous 24 Hours</h2>
             <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
             </div>
@@ -83,7 +83,7 @@
 
         <!-- 5. Future 24 Hours Section -->
         <section id="future-hours"
-            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8">
+            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8 text-center">
             <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Next 24 Hours</h2>
             <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
             </div>
@@ -92,7 +92,7 @@
         <!-- 6. Refresh Button -->
         <div class="flex justify-center pt-2 pb-6">
             <button type="button" id="refresh-btn"
-                class="btn btn-outline btn-accent sm:btn-wide rounded-xl shadow-lg border-white/30 text-white hover:bg-white/20 hover:border-white/40">
+                class="btn btn-outline btn-accent sm:btn-wide rounded-xl shadow-2xl  bg-green-800 border-white/30 text-white hover:bg-green-500 focus:outline-none">
                 Refresh
             </button>
         </div>
