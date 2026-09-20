@@ -10,30 +10,39 @@
     <link href="./output.css" rel="stylesheet">
 </head>
 
-<body class="bg-cover bg-center bg-no-repeat min-h-screen flex justify-center items-center " <body class=" "
+<body
+    class="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat flex flex-col justify-start p-4 sm:p-6 lg:p-10 text-white antialiased selection:bg-emerald-400 selection:text-slate-900"
     style="background-image: url('./paul-green-tvk4EKq9m_w-unsplash.jpg');">
 
     <div class="w-full max-w-4xl mx-auto flex flex-col gap-6 sm:gap-8 my-auto">
 
         <!-- 1. Header -->
         <header class="text-center py-4">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-md">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
                 Weather Dashboard
             </h1>
-            <p class="text-sm sm:text-base text-white/80 mt-1 drop-shadow-sm font-medium">
+            <p class="text-sm sm:text-base text-emerald-100/90 mt-2 drop-shadow font-medium tracking-wide">
                 Live forecast and 24-hour weather insights
             </p>
         </header>
 
-        <!-- 2. Search Area -->
+        <!-- 2. Interactive Search Area -->
         <section aria-label="Search Location" class="w-full max-w-lg mx-auto">
             <form
-                class="flex flex-col sm:flex-row gap-3 items-stretch shadow-lg rounded-2xl p-1.5 bg-slate-900/60 backdrop-blur-md border border-white/20"
+                class="flex flex-col sm:flex-row gap-2.5 items-stretch shadow-2xl shadow-black/60 rounded-2xl p-2 bg-emerald-950/65 backdrop-blur-xl border border-emerald-500/25 transition-all duration-300 focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-400/40 hover:border-emerald-400/40"
                 onsubmit="return false;">
-                <input type="text" id="location-input" placeholder="Search city or location"
-                    class="input input-ghost flex-1 text-white placeholder:text-white/60 focus:outline-none" />
+                <div class="flex items-center flex-1 px-3 gap-2.5">
+                    <!-- Search Icon SVG -->
+                    <svg class="w-5 h-5 text-emerald-300/75 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35M16.65 11a5.65 5.65 0 11-11.3 0 5.65 5.65 0 0111.3 0z"></path>
+                    </svg>
+                    <input type="text" id="location-input" placeholder="Search city or location..."
+                        class="bg-transparent w-full text-white placeholder:text-emerald-100/50 focus:outline-none text-sm sm:text-base py-2 font-medium" />
+                </div>
                 <button type="button" id="search-btn"
-                    class="btn btn-primary sm:px-6 rounded-xl font-semibold shadow-md">
+                    class="btn sm:px-6 bg-blue-600 hover:bg-blue-500 text-white border-none rounded-xl font-bold shadow-lg shadow-blue-600/30 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50 active:scale-95">
                     Search
                 </button>
             </form>
@@ -41,58 +50,92 @@
 
         <!-- 3. Current Weather Section -->
         <section aria-label="Current Weather"
-            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl overflow-hidden p-6 sm:p-8">
+            class="card bg-emerald-950/65 backdrop-blur-xl border border-emerald-500/25 text-white shadow-2xl shadow-black/60 rounded-3xl overflow-hidden p-6 sm:p-8 transition-all duration-300 hover:border-emerald-400/40 hover:shadow-emerald-950/40">
             <div
-                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/10">
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-emerald-500/20">
                 <div>
-                    <h2 id="location" class="text-2xl sm:text-3xl font-bold tracking-tight"></h2>
+                    <h2 id="location" class="text-2xl sm:text-3xl font-bold tracking-tight drop-shadow-sm"></h2>
                     <span
-                        class="text-xs uppercase tracking-widest text-white/60 font-semibold mt-1 block">Condition</span>
-                    <p id="condition" class="text-base sm:text-lg font-medium text-white/90"></p>
+                        class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold mt-1 block">Condition</span>
+                    <p id="condition" class="text-base sm:text-lg font-medium text-white/95"></p>
                 </div>
             </div>
 
             <!-- Temperature Highlight -->
             <div class="py-6 sm:py-8">
-                <span class="text-xs uppercase tracking-widest text-white/60 font-semibold block">Temperature</span>
-                <p id="temperature" class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1"></p>
+                <span class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
+                <p id="temperature" class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
             </div>
 
-            <!-- Meteorological Details Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+            <!-- Meteorological Details Grid with Visual Icons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-emerald-500/20">
+                <!-- Wind Stat Card -->
                 <div
-                    class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10 flex flex-col justify-center">
-                    <span class="text-xs uppercase tracking-wider text-white/70 font-semibold">Wind</span>
-                    <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                    class="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 border border-emerald-500/20 flex items-center justify-between transition-all duration-200 hover:bg-emerald-900/60 hover:border-emerald-400/30">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Wind</span>
+                        <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                    </div>
+                    <!-- Wind Icon SVG (White) -->
+                    <div class="p-2.5 rounded-xl bg-white/10 text-white border border-white/20 shadow-inner">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2">
+                            </path>
+                        </svg>
+                    </div>
                 </div>
+
+                <!-- Rain Probability Stat Card -->
                 <div
-                    class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/10 flex flex-col justify-center">
-                    <span class="text-xs uppercase tracking-wider text-white/70 font-semibold">Rain Probability</span>
-                    <p id="rain" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                    class="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 border border-emerald-500/20 flex items-center justify-between transition-all duration-200 hover:bg-emerald-900/60 hover:border-emerald-400/30">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Rain
+                            Probability</span>
+                        <p id="rain" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                    </div>
+                    <!-- Raindrop Icon SVG (Water Blue) -->
+                    <div class="p-2.5 rounded-xl bg-blue-500/20 text-sky-400 border border-blue-400/30 shadow-inner">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 4. Previous 24 Hours Section -->
         <section id="previous-hours"
-            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8 text-center">
-            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Previous 24 Hours</h2>
-            <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
+            class="card bg-emerald-950/65 backdrop-blur-xl border border-emerald-500/25 text-white shadow-2xl shadow-black/60 rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:border-emerald-400/35">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4 text-emerald-50">Previous 24 Hours</h2>
+            <div class="overflow-x-auto flex gap-4 py-2 min-h-[80px] items-center">
+                <!-- JavaScript will populate hourly weather cards here later -->
             </div>
         </section>
 
         <!-- 5. Future 24 Hours Section -->
         <section id="future-hours"
-            class="card bg-slate-900/65 backdrop-blur-lg border border-white/20 text-white shadow-2xl rounded-3xl p-6 sm:p-8 text-center">
-            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4">Next 24 Hours</h2>
-            <div class="overflow-x-auto flex gap-4 py-2 min-h-[72px]">
+            class="card bg-emerald-950/65 backdrop-blur-xl border border-emerald-500/25 text-white shadow-2xl shadow-black/60 rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:border-emerald-400/35">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight mb-4 text-emerald-50">Next 24 Hours</h2>
+            <div class="overflow-x-auto flex gap-4 py-2 min-h-[80px] items-center">
+                <!-- JavaScript will populate hourly weather cards here later -->
             </div>
         </section>
 
-        <!-- 6. Refresh Button -->
+        <!-- 6. Refresh Button with Interactive Spin on Hover -->
         <div class="flex justify-center pt-2 pb-6">
             <button type="button" id="refresh-btn"
-                class="btn btn-outline btn-accent sm:btn-wide rounded-xl shadow-2xl  bg-green-800 border-white/30 text-white hover:bg-green-500 focus:outline-none">
+                class="group btn sm:btn-wide bg-blue-600 hover:bg-blue-500 text-white border-none rounded-xl shadow-lg shadow-blue-600/30 font-bold gap-2 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50 hover:scale-105 active:scale-95">
+                <!-- Spinning Refresh Icon SVG -->
+                <svg class="w-5 h-5 transition-transform duration-500 group-hover:rotate-180" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                    </path>
+                </svg>
                 Refresh
             </button>
         </div>
