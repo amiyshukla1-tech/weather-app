@@ -11,14 +11,34 @@
 </head>
 
 <body
-    class="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat flex flex-col justify-start p-4 sm:p-6 lg:p-10 text-white antialiased selection:bg-emerald-400 selection:text-slate-900"
+    class="relative min-h-screen bg-cover bg-center bg-fixed bg-no-repeat flex flex-col justify-start p-4 sm:p-6 lg:p-10 text-white antialiased selection:bg-emerald-400 selection:text-slate-900"
     style="background-image: url('./paul-green-tvk4EKq9m_w-unsplash.jpg');">
 
-    <div class="w-full max-w-4xl mx-auto flex flex-col gap-6 sm:gap-8 my-auto">
+    <!-- Top Left Corner Logo -->
+    <div class="absolute top-4 left-4 sm:top-6 sm:left-8 z-50">
+        <div
+            class="flex items-center gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl bg-emerald-950/75 backdrop-blur-xl border border-emerald-500/30 shadow-xl shadow-black/50 hover:border-emerald-400/50 hover:scale-105 transition-all duration-300 cursor-pointer group">
+            <!-- Logo Icon (or replace SVG with <img src="./logo.png" alt="Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain">) -->
+            <div class="p-1.5 rounded-xl bg-gradient-to-tr from-emerald-400 to-cyan-400 text-slate-950 shadow-md">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.2"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+            </div>
+            <span
+                class="font-extrabold text-sm sm:text-base tracking-tight text-white group-hover:text-emerald-300 transition-colors drop-shadow">
+                Weather<span class="text-emerald-400">App</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="w-full max-w-4xl mx-auto flex flex-col gap-6 sm:gap-8 my-auto pt-14 sm:pt-4">
 
         <!-- 1. Header -->
         <header class="text-center py-4">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
+            <h1
+                class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.8)]">
                 Weather Dashboard
             </h1>
             <p class="text-sm sm:text-base text-emerald-100/90 mt-2 drop-shadow font-medium tracking-wide">
@@ -29,12 +49,12 @@
         <!-- 2. Interactive Search Area -->
         <section aria-label="Search Location" class="w-full max-w-lg mx-auto">
             <form
-                class="flex flex-col sm:flex-row gap-2.5 items-stretch shadow-2xl shadow-black/60 rounded-2xl p-2 bg-emerald-950/65 backdrop-blur-xl border border-emerald-500/25 transition-all duration-300 focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-400/40 hover:border-emerald-400/40"
+                class="flex flex-col sm:flex-row gap-2.5 items-stretch shadow-lg shadow-black/60 rounded-2xl p-2 bg-emerald-950/65"
                 onsubmit="return false;">
                 <div class="flex items-center flex-1 px-3 gap-2.5">
                     <!-- Search Icon SVG -->
-                    <svg class="w-5 h-5 text-emerald-300/75 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-5 h-5 text-emerald-300/75 shrink-0 focus:outline-none" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-4.35-4.35M16.65 11a5.65 5.65 0 11-11.3 0 5.65 5.65 0 0111.3 0z"></path>
                     </svg>
@@ -63,8 +83,10 @@
 
             <!-- Temperature Highlight -->
             <div class="py-6 sm:py-8">
-                <span class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
-                <p id="temperature" class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
+                <span
+                    class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
+                <p id="temperature"
+                    class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
             </div>
 
             <!-- Meteorological Details Grid with Visual Icons -->
@@ -73,7 +95,8 @@
                 <div
                     class="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 border border-emerald-500/20 flex items-center justify-between transition-all duration-200 hover:bg-emerald-900/60 hover:border-emerald-400/30">
                     <div>
-                        <span class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Wind</span>
+                        <span
+                            class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Wind</span>
                         <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
                     </div>
                     <!-- Wind Icon SVG (White) -->
