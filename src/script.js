@@ -1,5 +1,5 @@
 // CONFIG
-const API_KEY = '6NYKACSJPRC8NCA5BKRVU2B2T';
+const API_KEY = '6NYKACSJPRC8NCA5BKRVU2B2Tyes';
 const BASE_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
 // DOM REFERENCES
