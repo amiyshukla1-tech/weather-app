@@ -30,3 +30,13 @@ async function fetchWeather(location) {
 
     return await response.json();
 }
+
+function updateCurrentWeather(data) {
+    const current = data.currentConditions;
+
+    locationEl.textContent = data.resolvedAddress;
+    conditionEl.textContent = current.conditions;
+    tempEl.textContent = `${Math.round(current.temp)}°C`;
+    windEl.textContent = `${Math.round(current.windspeed)} km/h`;
+    rainEl.textContent = `${Math.round(current.precipprob ?? 0)}%`;
+}
