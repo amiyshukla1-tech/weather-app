@@ -40,3 +40,15 @@ function updateCurrentWeather(data) {
     windEl.textContent = `${Math.round(current.windspeed)} km/h`;
     rainEl.textContent = `${Math.round(current.precipprob ?? 0)}%`;
 }
+
+function getPreviousHours(data) {
+    const currentEpoch = data.currentConditions.datetimeEpoch;
+    const allHours = data.days.flatMap(day => day.hours);
+    return allHours.filter(hour => hour.datetimeEpoch < currentEpoch).slice(-24);
+}
+
+function getFutureHours(data) {
+    const currentEpoch = data.currentConditions.datetimeEpoch;
+    const allHours = data.days.flatMap(day => day.hours);
+    return allHours.filter(hour => hour.datetimeEpoch >= currentEpoch).slice(0, 24);
+}
