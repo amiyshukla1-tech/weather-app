@@ -168,6 +168,30 @@
 
     </div>
 
+    <!-- Error Modal Popup (matches user reference design) -->
+    <dialog id="error-modal" class="modal modal-bottom sm:modal-middle">
+        <div
+            class="modal-box bg-white text-zinc-800 rounded-3xl p-7 sm:p-9 text-center shadow-2xl max-w-xs sm:max-w-sm mx-auto border-none">
+            <h3 id="error-title" class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-800 mb-3">
+                Error
+            </h3>
+            <p id="error-message" class="text-base text-zinc-500 mb-8 font-normal leading-relaxed">
+                Oops, something went wrong. Please try again later.
+            </p>
+            <div class="modal-action justify-center mt-0 w-full">
+                <form method="dialog" class="w-full">
+                    <button
+                        class="btn w-full bg-[#289cf5] hover:bg-[#1d8de4] active:bg-[#1577c4] text-white border-none rounded-2xl font-bold text-lg h-12 shadow-lg shadow-sky-500/25 transition-all duration-150 hover:scale-[1.01] active:scale-95">
+                        OK
+                    </button>
+                </form>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/60 backdrop-blur-sm">
+            <button>close</button>
+        </form>
+    </dialog>
+
 </body>
 
 </html>

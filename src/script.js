@@ -28,7 +28,19 @@ async function fetchWeather(location) {
 
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`Weather data not found for "${location}". (Status: ${response.status})`);
+        if (response.status === 429) {
+            const err = new Error('Weather service limit reached. Please try again later..');
+            err.title = 'Weather Limit Reached';
+            throw err;
+        }
+        if (response.status === 400 || response.status === 404) {
+            const err = new Error(`We couldn't find weather for "${location}". Please check the spelling and try again.`);
+            err.title = 'City Not Found';
+            throw err;
+        }
+        const err = new Error('Oops, something went wrong. Please try again later.');
+        err.title = 'Error';
+        throw err;
     }
 
     return await response.json();
@@ -110,15 +122,16 @@ function hideLoading() {
     searchBtn.innerHTML = 'Search';
 }
 
-function showError(message) {
-    locationEl.textContent = 'City Not Found';
-    conditionEl.textContent = message || 'Please verify the city name and try again.';
-    tempEl.textContent = '--';
-    windEl.textContent = '--';
-    rainEl.textContent = '--';
-    if (weatherIconEl) weatherIconEl.textContent = '❓';
-    if (previousHoursContainer) previousHoursContainer.innerHTML = '';
-    if (futureHoursContainer) futureHoursContainer.innerHTML = '';
+function showError(title, message) {
+    const errorModal = document.getElementById('error-modal');
+    const errorTitle = document.getElementById('error-title');
+    const errorMessage = document.getElementById('error-message');
+
+    if (errorModal && errorTitle && errorMessage) {
+        errorTitle.textContent = title || 'Error';
+        errorMessage.textContent = message || 'Oops, something went wrong. Please try again later.';
+        errorModal.showModal();
+    }
 }
 
 async function fetchCitySuggestions(query) {
@@ -173,7 +186,7 @@ async function handleSearch(targetLocation) {
     hideSuggestions();
 
     if (!query) {
-        showError('Please enter a city or location name.');
+        showError('Location Required', 'Please enter a city or location name.');
         return;
     }
 
@@ -188,7 +201,7 @@ async function handleSearch(targetLocation) {
         lastSearchedLocation = query;
         locationInput.value = '';
     } catch (error) {
-        showError(error.message);
+        showError(error.title || 'Error', error.message);
     } finally {
         hideLoading();
     }
