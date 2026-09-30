@@ -79,10 +79,10 @@
             <div
                 class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-emerald-500/20">
                 <div>
-                    <h2 id="location" class="text-2xl sm:text-3xl font-bold tracking-tight drop-shadow-sm"></h2>
+                    <h2 id="location" class="text-2xl sm:text-3xl font-bold tracking-tight drop-shadow-sm">Weather Forecast</h2>
                     <span
                         class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold mt-1 block">Condition</span>
-                    <p id="condition" class="text-base sm:text-lg font-medium text-white/95"></p>
+                    <p id="condition" class="text-base sm:text-lg font-medium text-white/95">Search for any city above to view live forecast</p>
                 </div>
             </div>
 
@@ -92,11 +92,12 @@
                     <span
                         class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
                     <p id="temperature"
-                        class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
+                        class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md">--°C</p>
                 </div>
                 <!-- Dynamic Weather Condition Icon -->
                 <div id="weather-icon"
                     class="text-6xl sm:text-7xl lg:text-8xl select-none drop-shadow-lg transition-transform duration-300 hover:scale-110">
+                    🌤️
                 </div>
             </div>
 
@@ -108,7 +109,7 @@
                     <div>
                         <span
                             class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Wind</span>
-                        <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                        <p id="wind" class="text-xl sm:text-2xl font-bold mt-1 text-white">-- km/h</p>
                     </div>
                     <!-- Wind Icon SVG (White) -->
                     <div class="p-2.5 rounded-xl bg-white/10 text-white border border-white/20 shadow-inner">
@@ -127,7 +128,7 @@
                     <div>
                         <span class="text-xs uppercase tracking-wider text-emerald-200/80 font-semibold block">Rain
                             Probability</span>
-                        <p id="rain" class="text-xl sm:text-2xl font-bold mt-1 text-white"></p>
+                        <p id="rain" class="text-xl sm:text-2xl font-bold mt-1 text-white">--%</p>
                     </div>
                     <!-- Raindrop Icon SVG (Water Blue) -->
                     <div class="p-2.5 rounded-xl bg-blue-500/20 text-sky-400 border border-blue-400/30 shadow-inner">

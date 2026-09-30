@@ -246,5 +246,7 @@ refreshBtn.addEventListener('click', () => {
     }
 });
 
-// INITIAL LOAD (Populate dashboard on first visit)
-handleSearch('London');
+// INITIAL LOAD
+// Disabled auto-fetch on page load to prevent burning daily API quota. 
+// Searches are now triggered on-demand by user input.
+// handleSearch('London');
