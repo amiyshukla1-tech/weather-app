@@ -47,7 +47,7 @@
         </header>
 
         <!-- 2. Interactive Search Area -->
-        <section aria-label="Search Location" class="w-full max-w-lg mx-auto">
+        <section aria-label="Search Location" class="w-full max-w-lg mx-auto relative">
             <form
                 class="flex flex-col sm:flex-row gap-2.5 items-stretch shadow-lg shadow-black/60 rounded-2xl p-2 bg-emerald-950/65"
                 onsubmit="return false;">
@@ -58,7 +58,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-4.35-4.35M16.65 11a5.65 5.65 0 11-11.3 0 5.65 5.65 0 0111.3 0z"></path>
                     </svg>
-                    <input type="text" id="location-input" placeholder="Search city or location..."
+                    <input type="text" id="location-input" placeholder="Search city or location..." autocomplete="off"
                         class="bg-transparent w-full text-white placeholder:text-emerald-100/50 focus:outline-none text-sm sm:text-base py-2 font-medium" />
                 </div>
                 <button type="button" id="search-btn"
@@ -66,6 +66,11 @@
                     Search
                 </button>
             </form>
+
+            <!-- Autocomplete Suggestions Dropdown -->
+            <ul id="suggestions-list"
+                class="hidden absolute top-full left-0 right-0 mt-2 bg-emerald-950/90 backdrop-blur-xl border border-emerald-500/30 rounded-2xl shadow-2xl z-50 overflow-hidden divide-y divide-emerald-500/10 max-h-60 overflow-y-auto">
+            </ul>
         </section>
 
         <!-- 3. Current Weather Section -->
