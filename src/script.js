@@ -11,6 +11,7 @@ const suggestionsList = document.getElementById('suggestions-list');
 const locationEl = document.getElementById('location');
 const conditionEl = document.getElementById('condition');
 const tempEl = document.getElementById('temperature');
+const weatherIconEl = document.getElementById('weather-icon');
 const windEl = document.getElementById('wind');
 const rainEl = document.getElementById('rain');
 
@@ -33,6 +34,22 @@ async function fetchWeather(location) {
     return await response.json();
 }
 
+function getWeatherIcon(icon) {
+    if (!icon) return '⛅';
+    const name = icon.toLowerCase();
+    if (name.includes('thunder')) return '⛈️';
+    if (name.includes('snow') || name.includes('sleet') || name.includes('ice') || name.includes('hail')) return '❄️';
+    if (name.includes('rain') || name.includes('shower')) return '🌧️';
+    if (name.includes('wind')) return '💨';
+    if (name.includes('fog')) return '🌫️';
+    if (name.includes('partly-cloudy-night')) return '☁️';
+    if (name.includes('partly-cloudy-day') || name.includes('partly-cloudy')) return '⛅';
+    if (name.includes('cloud') || name.includes('overcast')) return '☁️';
+    if (name.includes('clear-night')) return '🌙';
+    if (name.includes('clear')) return '☀️';
+    return '⛅';
+}
+
 function updateCurrentWeather(data) {
     const current = data.currentConditions;
 
@@ -41,6 +58,10 @@ function updateCurrentWeather(data) {
     tempEl.textContent = `${Math.round(current.temp)}°C`;
     windEl.textContent = `${Math.round(current.windspeed)} km/h`;
     rainEl.textContent = `${Math.round(current.precipprob ?? 0)}%`;
+
+    if (weatherIconEl) {
+        weatherIconEl.textContent = getWeatherIcon(current.icon);
+    }
 }
 
 function getPreviousHours(data) {
@@ -59,10 +80,12 @@ function renderHourCard(hourData) {
     const time = hourData.datetime.slice(0, 5);
     const temp = Math.round(hourData.temp);
     const rain = Math.round(hourData.precipprob ?? 0);
+    const icon = getWeatherIcon(hourData.icon);
 
     return `
         <div class="min-w-[90px] sm:min-w-[105px] shrink-0 flex flex-col items-center justify-between p-3 rounded-2xl bg-emerald-900/40 backdrop-blur-md border border-emerald-500/20 hover:border-emerald-400/40 hover:bg-emerald-900/60 transition-all duration-200 text-center gap-1.5 shadow-md">
             <span class="text-xs font-semibold text-emerald-200/80 tracking-wide">${time}</span>
+            <span class="text-2xl my-0.5 select-none drop-shadow">${icon}</span>
             <span class="text-lg font-extrabold text-white">${temp}°C</span>
             <span class="text-[11px] text-white/70 truncate w-full px-1" title="${hourData.conditions}">${hourData.conditions}</span>
             <span class="text-[10px] text-sky-300 font-medium">💧 ${rain}%</span>
@@ -93,6 +116,7 @@ function showError(message) {
     tempEl.textContent = '--';
     windEl.textContent = '--';
     rainEl.textContent = '--';
+    if (weatherIconEl) weatherIconEl.textContent = '❓';
     if (previousHoursContainer) previousHoursContainer.innerHTML = '';
     if (futureHoursContainer) futureHoursContainer.innerHTML = '';
 }

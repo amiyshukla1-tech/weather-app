@@ -86,12 +86,18 @@
                 </div>
             </div>
 
-            <!-- Temperature Highlight -->
-            <div class="py-6 sm:py-8">
-                <span
-                    class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
-                <p id="temperature"
-                    class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
+            <!-- Temperature Highlight & Dynamic Icon -->
+            <div class="py-6 sm:py-8 flex justify-between items-center">
+                <div>
+                    <span
+                        class="text-xs uppercase tracking-widest text-emerald-200/70 font-semibold block">Temperature</span>
+                    <p id="temperature"
+                        class="text-6xl sm:text-7xl font-black tracking-tight text-white mt-1 drop-shadow-md"></p>
+                </div>
+                <!-- Dynamic Weather Condition Icon -->
+                <div id="weather-icon"
+                    class="text-6xl sm:text-7xl lg:text-8xl select-none drop-shadow-lg transition-transform duration-300 hover:scale-110">
+                </div>
             </div>
 
             <!-- Meteorological Details Grid with Visual Icons -->
