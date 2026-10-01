@@ -193,6 +193,37 @@
         </form>
     </dialog>
 
+    <!-- Refresh Confirmation Modal -->
+    <dialog id="refresh-modal" class="modal modal-bottom sm:modal-middle">
+        <div
+            class="modal-box bg-white text-zinc-800 rounded-3xl p-7 sm:p-8 text-center shadow-2xl max-w-xs sm:max-w-sm mx-auto border-none">
+            <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-500 mx-auto flex items-center justify-center text-2xl mb-3 shadow-inner">
+                🔄
+            </div>
+            <h3 class="text-2xl font-bold tracking-tight text-zinc-800 mb-2">
+                Live Update
+            </h3>
+            <p id="refresh-modal-message" class="text-sm sm:text-base text-zinc-500 mb-6 font-normal leading-relaxed">
+                Would you like to fetch fresh live weather data?
+            </p>
+            <div class="flex items-center gap-3 w-full">
+                <form method="dialog" class="flex-1">
+                    <button
+                        class="btn w-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border-none rounded-2xl font-semibold text-base h-11 transition-all">
+                        Cancel
+                    </button>
+                </form>
+                <button id="confirm-refresh-btn"
+                    class="btn flex-1 bg-[#289cf5] hover:bg-[#1d8de4] active:bg-[#1577c4] text-white border-none rounded-2xl font-bold text-base h-11 shadow-lg shadow-sky-500/25 transition-all duration-150 hover:scale-[1.02] active:scale-95">
+                    Proceed
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop bg-black/60 backdrop-blur-sm">
+            <button>close</button>
+        </form>
+    </dialog>
+
 </body>
 
 </html>

@@ -1,12 +1,18 @@
 // CONFIG
 const API_KEY = '6NYKACSJPRC8NCA5BKRVU2B2T';
 const BASE_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
+const CACHE_PREFIX = 'weather_cache_';
+const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
 // DOM REFERENCES
 const locationInput = document.getElementById('location-input');
 const searchBtn = document.getElementById('search-btn');
 const refreshBtn = document.getElementById('refresh-btn');
 const suggestionsList = document.getElementById('suggestions-list');
+
+const refreshModal = document.getElementById('refresh-modal');
+const refreshModalMessage = document.getElementById('refresh-modal-message');
+const confirmRefreshBtn = document.getElementById('confirm-refresh-btn');
 
 const locationEl = document.getElementById('location');
 const conditionEl = document.getElementById('condition');
@@ -22,8 +28,52 @@ const futureHoursContainer = document.querySelector('#future-hours > div');
 let lastSearchedLocation = '';
 let debounceTimer = null;
 
+// CACHE HELPERS
+function getCachedWeather(location) {
+    try {
+        const key = `${CACHE_PREFIX}${location.trim().toLowerCase()}`;
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+
+        const cached = JSON.parse(raw);
+        if (!cached || !cached.timestamp || !cached.data) return null;
+
+        const isExpired = Date.now() - cached.timestamp > CACHE_TTL_MS;
+        if (isExpired) {
+            localStorage.removeItem(key);
+            return null;
+        }
+
+        return cached.data;
+    } catch {
+        return null;
+    }
+}
+
+function setCachedWeather(location, data) {
+    try {
+        const key = `${CACHE_PREFIX}${location.trim().toLowerCase()}`;
+        const payload = {
+            timestamp: Date.now(),
+            data: data
+        };
+        localStorage.setItem(key, JSON.stringify(payload));
+    } catch {
+        // Gracefully ignore storage quota or private browsing limits
+    }
+}
+
 // FUNCTIONS
-async function fetchWeather(location) {
+async function fetchWeather(location, forceRefresh = false) {
+    // 1. Check valid cache first unless forced refresh requested
+    if (!forceRefresh) {
+        const cachedData = getCachedWeather(location);
+        if (cachedData) {
+            return cachedData;
+        }
+    }
+
+    // 2. Fetch live data from API
     const url = `${BASE_URL}/${encodeURIComponent(location)}/yesterday/tomorrow?unitGroup=metric&include=hours,current,days&key=${API_KEY}&contentType=json`;
 
     const response = await fetch(url);
@@ -43,7 +93,12 @@ async function fetchWeather(location) {
         throw err;
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    // 3. Store fresh data in cache
+    setCachedWeather(location, data);
+
+    return data;
 }
 
 function getWeatherIcon(icon) {
@@ -181,7 +236,7 @@ function hideSuggestions() {
     }
 }
 
-async function handleSearch(targetLocation) {
+async function handleSearch(targetLocation, forceRefresh = false) {
     const query = (targetLocation || locationInput.value).trim();
     hideSuggestions();
 
@@ -192,7 +247,7 @@ async function handleSearch(targetLocation) {
 
     try {
         showLoading();
-        const data = await fetchWeather(query);
+        const data = await fetchWeather(query, forceRefresh);
 
         updateCurrentWeather(data);
         renderHourlyList(getPreviousHours(data), previousHoursContainer);
@@ -241,10 +296,29 @@ document.addEventListener('click', (e) => {
 });
 
 refreshBtn.addEventListener('click', () => {
-    if (lastSearchedLocation) {
-        handleSearch(lastSearchedLocation);
+    if (!lastSearchedLocation) {
+        showError('No Location Selected', 'Please search for a city before refreshing.');
+        return;
+    }
+
+    if (refreshModal && refreshModalMessage) {
+        refreshModalMessage.textContent = `Would you like to fetch fresh live weather data for "${lastSearchedLocation}"?`;
+        refreshModal.showModal();
+    } else {
+        handleSearch(lastSearchedLocation, true);
     }
 });
+
+if (confirmRefreshBtn) {
+    confirmRefreshBtn.addEventListener('click', () => {
+        if (refreshModal) {
+            refreshModal.close();
+        }
+        if (lastSearchedLocation) {
+            handleSearch(lastSearchedLocation, true);
+        }
+    });
+}
 
 // INITIAL LOAD
 // Disabled auto-fetch on page load to prevent burning daily API quota. 

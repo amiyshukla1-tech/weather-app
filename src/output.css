@@ -17,6 +17,7 @@
     --color-emerald-900: oklch(37.8% 0.077 168.94);
     --color-emerald-950: oklch(26.2% 0.051 172.552);
     --color-cyan-400: oklch(78.9% 0.154 211.53);
+    --color-sky-50: oklch(97.7% 0.013 236.62);
     --color-sky-300: oklch(82.8% 0.111 230.318);
     --color-sky-400: oklch(74.6% 0.16 232.661);
     --color-sky-500: oklch(68.5% 0.169 237.323);
@@ -26,7 +27,10 @@
     --color-blue-700: oklch(48.8% 0.243 264.376);
     --color-slate-900: oklch(20.8% 0.042 265.755);
     --color-slate-950: oklch(12.9% 0.042 264.695);
+    --color-zinc-100: oklch(96.7% 0.001 286.375);
+    --color-zinc-200: oklch(92% 0.004 286.32);
     --color-zinc-500: oklch(55.2% 0.016 285.938);
+    --color-zinc-700: oklch(37% 0.013 285.805);
     --color-zinc-800: oklch(27.4% 0.006 286.033);
     --color-black: #000;
     --color-white: #fff;
@@ -1085,11 +1089,17 @@
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
   }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
   }
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
@@ -1164,6 +1174,9 @@
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
@@ -1186,6 +1199,9 @@
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
+  }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
   }
   .w-full {
     width: 100%;
@@ -1243,6 +1259,9 @@
   }
   .gap-2\.5 {
     gap: calc(var(--spacing) * 2.5);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -1377,6 +1396,9 @@
       background-color: color-mix(in oklab, var(--color-emerald-950) 90%, transparent);
     }
   }
+  .bg-sky-50 {
+    background-color: var(--color-sky-50);
+  }
   .bg-transparent {
     background-color: transparent;
   }
@@ -1388,6 +1410,9 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
     }
+  }
+  .bg-zinc-100 {
+    background-color: var(--color-zinc-100);
   }
   .bg-gradient-to-tr {
     --tw-gradient-position: to top right in oklab;
@@ -1601,6 +1626,9 @@
   .text-sky-400 {
     color: var(--color-sky-400);
   }
+  .text-sky-500 {
+    color: var(--color-sky-500);
+  }
   .text-slate-950 {
     color: var(--color-slate-950);
   }
@@ -1621,6 +1649,9 @@
   }
   .text-zinc-500 {
     color: var(--color-zinc-500);
+  }
+  .text-zinc-700 {
+    color: var(--color-zinc-700);
   }
   .text-zinc-800 {
     color: var(--color-zinc-800);
@@ -1801,6 +1832,9 @@
     .hover\:scale-\[1\.01\]:hover {
       scale: 1.01;
     }
+    .hover\:scale-\[1\.02\]:hover {
+      scale: 1.02;
+    }
     .hover\:border-emerald-400\/30:hover {
       border-color: color-mix(in srgb, oklch(76.5% 0.177 163.223) 30%, transparent);
     }
@@ -1846,6 +1880,9 @@
       .hover\:bg-emerald-900\/60:hover {
         background-color: color-mix(in oklab, var(--color-emerald-900) 60%, transparent);
       }
+    }
+    .hover\:bg-zinc-200:hover {
+      background-color: var(--color-zinc-200);
     }
     .hover\:shadow-emerald-950\/40:hover {
       --tw-shadow-color: color-mix(in srgb, oklch(26.2% 0.051 172.552) 40%, transparent);
