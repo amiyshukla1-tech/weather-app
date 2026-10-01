@@ -73,10 +73,20 @@ async function fetchWeather(location, forceRefresh = false) {
         }
     }
 
-    // 2. Fetch live data from API
-    const url = `${BASE_URL}/${encodeURIComponent(location)}/yesterday/tomorrow?unitGroup=metric&include=hours,current,days&key=${API_KEY}&contentType=json`;
+    // 2. Fetch live data from API (Uses secure serverless proxy on Vercel)
+    const proxyUrl = `/api/weather?city=${encodeURIComponent(location)}`;
+    const directUrl = `${BASE_URL}/${encodeURIComponent(location)}/yesterday/tomorrow?unitGroup=metric&include=hours,current,days&key=${API_KEY}&contentType=json`;
 
-    const response = await fetch(url);
+    let response;
+    try {
+        response = await fetch(proxyUrl);
+        // If running in local environment without Vercel serverless function (404), fallback to direct API
+        if (response.status === 404) {
+            response = await fetch(directUrl);
+        }
+    } catch {
+        response = await fetch(directUrl);
+    }
     if (!response.ok) {
         if (response.status === 429) {
             const err = new Error('Weather service limit reached. Please try again later..');
