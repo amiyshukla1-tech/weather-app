@@ -1,6 +1,4 @@
 // CONFIG
-const API_KEY = '6NYKACSJPRC8NCA5BKRVU2B2T';
-const BASE_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 const CACHE_PREFIX = 'weather_cache_';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
@@ -73,20 +71,9 @@ async function fetchWeather(location, forceRefresh = false) {
         }
     }
 
-    // 2. Fetch live data from API (Uses secure serverless proxy on Vercel)
+    // 2. Fetch live data via secure serverless proxy
     const proxyUrl = `/api/weather?city=${encodeURIComponent(location)}`;
-    const directUrl = `${BASE_URL}/${encodeURIComponent(location)}/yesterday/tomorrow?unitGroup=metric&include=hours,current,days&key=${API_KEY}&contentType=json`;
-
-    let response;
-    try {
-        response = await fetch(proxyUrl);
-        // If running in local environment without Vercel serverless function (404), fallback to direct API
-        if (response.status === 404) {
-            response = await fetch(directUrl);
-        }
-    } catch {
-        response = await fetch(directUrl);
-    }
+    const response = await fetch(proxyUrl);
     if (!response.ok) {
         if (response.status === 429) {
             const err = new Error('Weather service limit reached. Please try again later..');

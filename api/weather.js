@@ -13,8 +13,11 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: 'City query parameter is required.' });
     }
 
-    // Secret API Key loaded from Vercel Environment Variables
-    const API_KEY = process.env.VISUAL_CROSSING_KEY || '6NYKACSJPRC8NCA5BKRVU2B2T';
+    // Secret API Key loaded securely from Vercel Environment Variables
+    const API_KEY = process.env.VISUAL_CROSSING_KEY;
+    if (!API_KEY) {
+        return res.status(500).json({ error: 'Server configuration error: VISUAL_CROSSING_KEY is missing.' });
+    }
     const BASE_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline';
 
     const url = `${BASE_URL}/${encodeURIComponent(city.trim())}/yesterday/tomorrow?unitGroup=metric&include=hours,current,days&key=${API_KEY}&contentType=json`;
